@@ -4,7 +4,6 @@ let completeList = document.getElementById("todo-list-complete");
 let itemIdCounter = 0;
 let draggingItem = null;
 
-// Function to handle the 'add' button click event
 addButton.addEventListener("click", function add() {
   let taskNameInput = document.getElementById("taskNameInput");
   let descriptionInput = document.getElementById("descriptionInput");
@@ -13,7 +12,17 @@ addButton.addEventListener("click", function add() {
     taskNameInput.value.trim() === "" ||
     descriptionInput.value.trim() === ""
   ) {
-    alert("Please fill out both task name and description.");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Please fill out both the task name and description fields.",
+      customClass: {
+        popup: "custom-swal-popup",
+        title: "custom-swal-title",
+        content: "custom-swal-content",
+        confirmButton: "custom-swal-confirm-button",
+      },
+    });
     return;
   }
 
@@ -60,22 +69,18 @@ addButton.addEventListener("click", function add() {
   document.getElementById("todo-form").reset();
 });
 
-// Function to handle the start of a drag operation
 function handleDragStart(event) {
   draggingItem = event.target;
 }
 
-// Function to handle the end of a drag operation
 function handleDragEnd() {
   draggingItem = null;
 }
 
-// Function to handle the movement of an item during a drag operation
 function handleDragOver(event) {
   event.preventDefault();
 }
 
-// Function to handle dropping an item into a new position
 function handleDrop(event) {
   if (draggingItem) {
     const target = event.target.closest("li");
@@ -108,17 +113,25 @@ function handleDrop(event) {
   }
 }
 
-// Add event listeners for mouse events
+document
+  .getElementById("todo-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    document.getElementById("taskNameInput").focus();
+    add();
+  });
+
+document.getElementById("toggleSwitch").addEventListener("change", function () {
+  if (this.checked) {
+    incompleteList.style.display = "none";
+    completeList.style.display = "block";
+  } else {
+    incompleteList.style.display = "block";
+    completeList.style.display = "none";
+  }
+});
+
 document.addEventListener("dragstart", handleDragStart);
 document.addEventListener("dragend", handleDragEnd);
 document.addEventListener("dragover", handleDragOver);
 document.addEventListener("drop", handleDrop);
-
-// Add event listeners for touch events
-document.addEventListener("touchstart", function (event) {
-  handleDragStart(event.touches[0]);
-});
-document.addEventListener("touchend", handleDragEnd);
-document.addEventListener("touchmove", function (event) {
-  handleDrop(event.touches[0]);
-});
