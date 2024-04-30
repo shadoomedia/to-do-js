@@ -1,0 +1,129 @@
+* {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2vh;
+  margin: 0;
+  padding: 0;
+}
+form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+h1 {
+  font-size: 5vh;
+  margin-top: 20px;
+  text-align: center;
+}
+h2 {
+  font-size: 3vh;
+  text-align: center;
+}
+ul {
+  border-radius: 1vh;
+  border: 0.5vh solid #ccc;
+  box-sizing: border-box;
+  font-weight: bolder;
+  min-height: 50vh;
+  max-height: 50vh;
+}
+ul li {
+  background-color: #e2e2e2;
+  border-radius: 1vh;
+  border: 0.5vh solid #ccc;
+  box-shadow: 0 0 0.5vh rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin-top: 4vh;
+  padding: 1vh;
+}
+#description,
+#taskName {
+  font-size: 3vh;
+}
+#list-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+#todo-list-complete .listTaskName {
+  list-style: "✓ ";
+}
+.btn {
+  background-color: #007bff;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 2.5vh;
+  margin-bottom: 3.5%;
+  margin-top: 1%;
+  min-width: 18%;
+  padding: 1vh;
+}
+.btn:hover {
+  background-color: #0056b3;
+}
+.complete-btn {
+  background-color: #11c41a;
+}
+
+.complete-btn:hover {
+  background-color: #08850e;
+}
+
+.complete-btn,
+.delete-btn {
+  font-size: 1.5vh;
+  margin: 1vh auto 1vh;
+  padding: 1vh 2vh;
+  width: 35%;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+.delete-btn:hover {
+  background-color: #8f0715;
+}
+.listTaskDescription {
+  color: #333333;
+  font-size: 1.5vh;
+  font-weight: lighter;
+  margin: 1vh auto;
+  max-width: 95%;
+  text-align: justify;
+  word-wrap: break-word;
+}
+.listTaskName {
+  display: list-item;
+  font-size: 2.2vh;
+  font-weight: bolder;
+  list-style: "□ ";
+  margin: auto;
+  max-width: 66%;
+  word-wrap: break-word;
+}
+.todo-input {
+  border-radius: 1vh;
+  border: 0.5vh solid #ccc;
+  box-sizing: border-box;
+  font-size: 2vh;
+  margin: 1vh 0;
+  padding: 1vh;
+  width: 30vw;
+}
+.todo-list {
+  border: 0.1rem solid;
+  min-height: 50vh;
+  max-width: 50vw;
+  overflow-y: scroll;
+  padding: 1vh;
+}
+.todo-list-container {
+  margin: 1vh;
+  text-align: center;
+  width: 100vh;
+}
