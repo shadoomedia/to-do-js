@@ -1,8 +1,8 @@
 let addButton = document.getElementById("button");
 let incompleteList = document.getElementById("todo-list-incomplete");
 let completeList = document.getElementById("todo-list-complete");
-
-addButton.addEventListener("click", function () {
+let itemIdCounter = 0;
+addButton.addEventListener("click", function add() {
   let taskNameInput = document.getElementById("taskNameInput");
   let descriptionInput = document.getElementById("descriptionInput");
 
@@ -15,6 +15,9 @@ addButton.addEventListener("click", function () {
   }
 
   let listItem = document.createElement("li");
+  listItem.draggable = true;
+  listItem.id = "item-" + itemIdCounter++;
+
   listItem.innerHTML =
     '<span class="listTaskName">' +
     taskNameInput.value +
@@ -31,6 +34,18 @@ addButton.addEventListener("click", function () {
   completeButton.addEventListener("click", function () {
     completeList.appendChild(listItem);
     listItem.removeChild(completeButton);
+    let undoButton = document.createElement("button");
+    undoButton.className = "btn undo-btn";
+    undoButton.textContent = "Undo";
+    listItem.appendChild(undoButton);
+
+    undoButton.addEventListener("click", function () {
+      incompleteList.appendChild(listItem);
+      listItem.removeChild(undoButton);
+      listItem.removeChild(deleteButton);
+      listItem.appendChild(completeButton);
+      listItem.appendChild(deleteButton);
+    });
   });
 
   deleteButton.addEventListener("click", function () {
@@ -40,4 +55,45 @@ addButton.addEventListener("click", function () {
   incompleteList.appendChild(listItem);
 
   document.getElementById("todo-form").reset();
+});
+
+let draggingItem = null;
+
+document.addEventListener("dragstart", function (event) {
+  draggingItem = event.target;
+});
+document.addEventListener("dragover", function (event) {
+  event.preventDefault();
+});
+
+document.addEventListener("drop", function (event) {
+  if (draggingItem) {
+    const target = event.target.closest("li");
+    if (
+      (draggingItem.closest("#todo-list-complete") &&
+        event.target.closest("#todo-list-incomplete")) ||
+      (draggingItem.closest("#todo-list-incomplete") &&
+        event.target.closest("#todo-list-complete"))
+    ) {
+      event.preventDefault();
+      return;
+    }
+
+    if (target) {
+      event.preventDefault();
+      const rect = target.getBoundingClientRect();
+      const nextItem =
+        event.clientY > rect.top + rect.height / 2
+          ? target.nextSibling
+          : target;
+
+      if (nextItem) {
+        target.parentNode.insertBefore(draggingItem, nextItem);
+      } else {
+        target.parentNode.appendChild(draggingItem);
+      }
+    }
+
+    draggingItem = null;
+  }
 });

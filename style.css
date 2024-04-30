@@ -1,24 +1,31 @@
 * {
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Rubik", sans-serif;
   font-size: 2vh;
   margin: 0;
   padding: 0;
+  background: #1d1b22;
+  color: snow;
 }
+
 form {
   align-items: center;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
+
 h1 {
   font-size: 5vh;
-  margin-top: 20px;
+  margin-top: 5px;
+  margin-bottom: 2vh;
   text-align: center;
 }
+
 h2 {
   font-size: 3vh;
   text-align: center;
 }
+
 ul {
   border-radius: 1vh;
   border: 0.5vh solid #ccc;
@@ -27,8 +34,8 @@ ul {
   min-height: 50vh;
   max-height: 50vh;
 }
+
 ul li {
-  background-color: #e2e2e2;
   border-radius: 1vh;
   border: 0.5vh solid #ccc;
   box-shadow: 0 0 0.5vh rgba(0, 0, 0, 0.6);
@@ -36,22 +43,27 @@ ul li {
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  margin-top: 4vh;
+  margin-top: 1vh;
   padding: 1vh;
+  transition: transform 0.3s ease-in-out;
 }
+
 #description,
 #taskName {
   font-size: 3vh;
 }
+
 #list-container {
   display: flex;
   justify-content: space-evenly;
 }
+
 #todo-list-complete .listTaskName {
   list-style: "✓ ";
 }
+
 .btn {
-  background-color: #007bff;
+  background-color: #4c76a3;
   border-radius: 8px;
   border: none;
   color: white;
@@ -61,35 +73,48 @@ ul li {
   margin-top: 1%;
   min-width: 18%;
   padding: 1vh;
+  transition: background-color 0.3s ease;
 }
+
 .btn:hover {
-  background-color: #0056b3;
+  background-color: #042d58;
 }
+
 .complete-btn {
-  background-color: #11c41a;
+  background-color: #3f9743;
 }
 
 .complete-btn:hover {
-  background-color: #08850e;
+  background-color: #256328;
 }
 
 .complete-btn,
-.delete-btn {
+.delete-btn,
+.undo-btn {
   font-size: 1.5vh;
   margin: 1vh auto 1vh;
   padding: 1vh 2vh;
-  width: 35%;
+  min-width: 10%;
+  transition: background-color 0.3s ease;
+}
+
+.undo-btn {
+  background-color: #41403b;
+}
+
+.undo-btn:hover {
+  background-color: #585853;
 }
 
 .delete-btn {
-  background-color: #dc3545;
-  color: #fff;
+  background-color: #9c3640;
 }
+
 .delete-btn:hover {
   background-color: #8f0715;
 }
+
 .listTaskDescription {
-  color: #333333;
   font-size: 1.5vh;
   font-weight: lighter;
   margin: 1vh auto;
@@ -97,6 +122,7 @@ ul li {
   text-align: justify;
   word-wrap: break-word;
 }
+
 .listTaskName {
   display: list-item;
   font-size: 2.2vh;
@@ -106,6 +132,7 @@ ul li {
   max-width: 66%;
   word-wrap: break-word;
 }
+
 .todo-input {
   border-radius: 1vh;
   border: 0.5vh solid #ccc;
@@ -114,16 +141,58 @@ ul li {
   margin: 1vh 0;
   padding: 1vh;
   width: 30vw;
+  background-color: #1c2127;
 }
+
 .todo-list {
   border: 0.1rem solid;
   min-height: 50vh;
   max-width: 50vw;
   overflow-y: scroll;
   padding: 1vh;
+  background-color: #1c2127;
 }
+
 .todo-list-container {
   margin: 1vh;
   text-align: center;
   width: 100vh;
+}
+
+li {
+  animation: bounce 0.3s ease 2 alternate;
+}
+
+li:hover,
+button:hover,
+input:hover {
+  animation: grab 0.1s ease-in-out forwards;
+}
+
+@keyframes grab {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.02);
+  }
+  100% {
+    transform: translateY(-2px) scale(1);
+  }
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-3px);
+  }
+}
+
+.indicator {
+  position: absolute;
+  background-color: #72a4da;
+  height: 6px;
+  display: none;
 }
