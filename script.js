@@ -62,7 +62,16 @@ let draggingItem = null;
 document.addEventListener("dragstart", function (event) {
   draggingItem = event.target;
 });
+
+document.addEventListener("touchstart", function (event) {
+  draggingItem = event.target;
+});
+
 document.addEventListener("dragover", function (event) {
+  event.preventDefault();
+});
+
+document.addEventListener("touchmove", function (event) {
   event.preventDefault();
 });
 
@@ -96,4 +105,8 @@ document.addEventListener("drop", function (event) {
 
     draggingItem = null;
   }
+});
+
+document.addEventListener("touchend", function (event) {
+  draggingItem = null;
 });
